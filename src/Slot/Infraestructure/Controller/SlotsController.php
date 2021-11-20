@@ -16,5 +16,6 @@ final class SlotsController extends AbstractController
     public function list(ListSlotsRequest $request): Response
     {
         // TODO: implement this (you can change the signature)
+
     }
 }
