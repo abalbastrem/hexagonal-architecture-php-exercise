@@ -17,6 +17,8 @@ final class ListSlotsRequest
         $this->dateTo = $dateTo;
     }
 
+    // TODO funcs missing?
+
     public function getSortType(): string
     {
         return $this->sortType;

@@ -26,5 +26,15 @@ class ExtAPISupplierSlotsRepository extends ServiceEntityRepository implements I
     public function fetchAll(): SlotsCollection
     {
         // TODO: Implement fetchAll() method.
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+        curl_setopt($ch, CURLOPT_USERPWD, "{$this->username}:{$this->password}");
+        $res = curl_exec($ch);
+
+        curl_close($ch);
+        var_dump($res);
     }
 }
