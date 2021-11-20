@@ -9,10 +9,14 @@ use App\Slot\Domain\ISupplierSlotsRepository;
 
 class SupplierFetchSlotsRequest implements FetchSlotsRequest
 {
-    private ISupplierSlotsRepository $slotRepository;
+    private ISupplierSlotsRepository $supplierSlotRepository;
+
+    public function __construct(ISupplierSlotsRepository $supplierSlotRepository) {
+        $this->supplierSlotRepository = $supplierSlotRepository;
+    }
 
     public function fetchAll(): SlotsCollection
     {
-        return $this->slotRepository->fetchAll();
+        return $this->supplierSlotRepository->fetchAll();
     }
 }

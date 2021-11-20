@@ -4,7 +4,7 @@ namespace App\Slot\Infraestructure\Repository;
 
 use App\Slot\Domain\Entity\Slot;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Slot|null find($id, $lockMode = null, $lockVersion = null)

@@ -27,8 +27,11 @@ final class SlotsController extends AbstractController
      */
     public function fetch(FetchSlotsRequest $request): Response
     {
-        $slots = $request->fetchAll();
-        print_r($slots);
+        try {
+            $request->fetchAll();
+        } catch (\Exception $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
 
         return new Response("fetch SUCCESS", 200);
     }
