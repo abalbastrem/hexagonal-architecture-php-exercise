@@ -1,5 +1,5 @@
 controllers:
-    resource: ../../src/Controller/
+    resource: ../../src/Slot/Infraestructure/Controller/
     type: annotation
 
 kernel:
