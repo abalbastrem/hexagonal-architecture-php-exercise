@@ -17,14 +17,13 @@ class ListSlotsService
     }
 
     public function list(ListSlotsRequest $request): SlotCollection {
+        // TODO fix criteria
         $criteria = array(
-            'dateFrom' => $request->getDateFrom(),
-            'dateTo' => $request->getDateTo(),
-            'doctorId' => $request->getDoctorId()
+//            'dateFrom' => $request->getDateFrom(),
+//            'dateTo' => $request->getDateTo(),
+//            'doctorId' => $request->getDoctorId()
         );
         $slots = $this->slotRepository->findBy($criteria);
-
-        var_dump($slots); die();
 
         $slotCollection = new SlotCollection();
         $slotCollection->addSlotArray($slots);

@@ -21,14 +21,15 @@ final class SlotsController extends AbstractController
     public function list(Request $request, ListSlotsService $service): Response
     {
         $listSlotsRequest = new ListSlotsRequest(
-            strval($request->get('sort', 0)),
-            new \DateTime($request->get('from', 'now')),
-            new \DateTime($request->get('to', 'now')),
-            $request->get('doctor')
+            strval($request->get('sort_type', 0)),
+            new \DateTime($request->get('date_from', 'now')),
+            new \DateTime($request->get('date_to', 'now')),
+//            $request->get('doctor_id')
         );
-        $service->list($listSlotsRequest);
+        echo "<pre>";
+        $slotSortedCollection = $service->list($listSlotsRequest);
 
-        return new Response("list SUCCESS", 200);
+        return new Response(print_r($slotSortedCollection, true), 200);
     }
 
     /**
