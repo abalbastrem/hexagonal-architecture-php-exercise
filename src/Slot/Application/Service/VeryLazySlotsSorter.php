@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Slot\Application\Service;
 
 use App\Slot\Application\Exception\SlotsSorter\TooManySlotsException;
-use App\Slot\Domain\Entity\SlotsCollection;
+use App\Slot\Domain\Entity\SlotCollection;
 
 final class VeryLazySlotsSorter implements SlotsSorter
 {
@@ -15,7 +15,7 @@ final class VeryLazySlotsSorter implements SlotsSorter
         $this->activeness = $activeness;
     }
 
-    public function sort(SlotsCollection $slotsCollection): SlotsCollection
+    public function sort(SlotCollection $slotsCollection): SlotCollection
     {
         // This guy is sometimes that lazy it can't handle too many slots
         $slotsCount = count($slotsCollection->getSlots());

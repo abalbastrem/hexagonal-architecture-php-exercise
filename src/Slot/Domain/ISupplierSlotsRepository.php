@@ -4,9 +4,9 @@
 namespace App\Slot\Domain;
 
 
-use App\Slot\Domain\Entity\SlotsCollection;
+use App\Slot\Domain\Entity\SlotCollection;
 
 interface ISupplierSlotsRepository
 {
-    public function fetchAll(): SlotsCollection;
+    public function fetchAll(array $args): array;
 }

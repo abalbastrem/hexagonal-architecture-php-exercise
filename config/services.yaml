@@ -11,13 +11,17 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    supplier_fetch_slots_request:
-        class: App\Slot\Application\SupplierFetchSlotsRequest
-        arguments:
-            - "@supplier_slot_repository"
-
-    supplier_slot_repository:
-        class: App\Slot\Infraestructure\Repository\ExtAPISupplierSlotsRepository
+#    obtain_supplier_slots_service:
+#        class: App\Slot\Application\Service\ObtainSupplierSlotsService
+#        arguments:
+#            - "@supplier_slot_repository"
+#            - "@slot_repository"
+#
+#    supplier_slot_repository:
+#        class: App\Slot\Infrastructure\Repository\ExtAPISupplierSlotsRepository
+#
+#    slot_repository:
+#        class: App\Slot\Infrastructure\Repository\SlotRepository
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -28,12 +32,11 @@ services:
             - '../src/Slot/Domain/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-            - '../src/Slot/Application/Service'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Slot\Infraestructure\Controller\:
-        resource: '../src/Slot/Infraestructure/Controller/'
+    App\Slot\Infrastructure\Controller\:
+        resource: '../src/Slot/Infrastructure/Controller/'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed

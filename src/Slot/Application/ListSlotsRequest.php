@@ -9,15 +9,15 @@ final class ListSlotsRequest
     private string $sortType;
     private DateTime $dateFrom;
     private DateTime $dateTo;
+    private ?int $doctorId;
 
-    public function __construct(string $sortType, DateTime $dateFrom, DateTime $dateTo)
+    public function __construct(string $sortType, DateTime $dateFrom, DateTime $dateTo, ?int $doctorId = null)
     {
         $this->sortType = $sortType;
         $this->dateFrom = $dateFrom;
         $this->dateTo = $dateTo;
+        $this->doctorId = $doctorId;
     }
-
-    // TODO funcs missing?
 
     public function getSortType(): string
     {
@@ -32,5 +32,10 @@ final class ListSlotsRequest
     public function getDateTo(): DateTime
     {
         return $this->dateTo;
+    }
+
+    public function getDoctorId(): ?int
+    {
+        return $this->doctorId;
     }
 }

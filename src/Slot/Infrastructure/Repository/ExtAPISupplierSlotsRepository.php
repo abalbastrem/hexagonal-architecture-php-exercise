@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Slot\Infraestructure\Repository;
+namespace App\Slot\Infrastructure\Repository;
 
 
 use App\Slot\Domain\Entity\Slot;
-use App\Slot\Domain\Entity\SlotsCollection;
+use App\Slot\Domain\Entity\SlotCollection;
 use App\Slot\Domain\ISupplierSlotsRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,7 +24,7 @@ class ExtAPISupplierSlotsRepository extends ServiceEntityRepository implements I
         parent::__construct($registry, Slot::class);
     }
 
-    public function fetchAll(): SlotsCollection
+    public function fetchAll(array $args = array()): array
     {
         $ch = curl_init();
 
@@ -35,7 +35,7 @@ class ExtAPISupplierSlotsRepository extends ServiceEntityRepository implements I
 
         $doctors = json_decode($res);
 
-        $slotsCollection = new SlotsCollection();
+        $slotsArr = array();
         foreach ($doctors as $doctor) {
             curl_setopt($ch, CURLOPT_URL, $this->apiUrl . sprintf($this->endpointSlots, $doctor->id));
             $res = curl_exec($ch);
@@ -46,13 +46,13 @@ class ExtAPISupplierSlotsRepository extends ServiceEntityRepository implements I
                     $slot->setDoctorId($doctor->id);
                     $slot->setDateFrom(new \DateTime($supplierSlot->start));
                     $slot->setDateTo(new \DateTime($supplierSlot->end));
-                    $slotsCollection->addSlot($slot);
+                    $slotsArr[] = $slot;
                 }
             }
         }
 
         curl_close($ch);
 
-        return $slotsCollection;
+        return $slotsArr;
     }
 }
