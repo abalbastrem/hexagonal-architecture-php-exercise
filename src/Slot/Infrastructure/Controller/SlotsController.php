@@ -23,7 +23,6 @@ final class SlotsController extends AbstractController
      */
     public function list(Request $request, ListSlotsService $service): Response
     {
-        echo "<pre>";
         try {
             if (empty($request->get('sort_type'))) {
                 throw new InvalidArgumentException();
@@ -55,7 +54,7 @@ final class SlotsController extends AbstractController
             )), 400);
         }
 
-        return new Response(json_encode($slotSortedCollection->flatten(), JSON_PRETTY_PRINT));
+        return new Response(json_encode($slotSortedCollection->flatten()));
     }
 
     /**
