@@ -18,8 +18,7 @@ class PullSlotsService
         $this->slotRepository = $slotRepository;
     }
 
-    // TODO extend Response?
-    public function pull(PullSlotsRequest $request) {
+    public function execute(PullSlotsRequest $request) {
         $fetchArgs = $request->getArgs();
         $slots = $this->supplierSlotsRepository->fetchAll($fetchArgs);
         $this->slotRepository->saveAll($slots);

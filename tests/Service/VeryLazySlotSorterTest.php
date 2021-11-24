@@ -2,8 +2,8 @@
 
 namespace App\Tests\Service;
 
-use App\Exception\SlotsSorter\TooManySlotsException;
-use App\Service\VeryLazySlotsSorter;
+use App\Slot\Application\Exception\SlotsSorter\TooManySlotsException;
+use App\Slot\Application\Service\SlotsSorter\VeryLazySlotsSorter;
 
 class VeryLazySlotSorterTest extends AbstractSlotSorterTest
 {

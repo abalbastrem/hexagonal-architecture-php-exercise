@@ -19,7 +19,7 @@ class ListSlotsService
         $this->slotRepository = $slotRepository;
     }
 
-    public function list(ListSlotsRequest $request): SlotCollection {
+    public function execute(ListSlotsRequest $request): SlotCollection {
         $criteria = array(
             'dateFrom' => $request->getDateFrom(),
             'dateTo' => $request->getDateTo()
