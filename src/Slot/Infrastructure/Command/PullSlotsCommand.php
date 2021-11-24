@@ -27,10 +27,11 @@ final class PullSlotsCommand extends Command
         try {
             $this->service->execute($this->request);
         } catch (\Exception) {
+            echo "FAIL! Slots not pulled\n";
             return Command::FAILURE;
         }
 
-        echo "SUCCESS: Slots pulled successfully\n";
+        echo "SUCCESS! Slots pulled successfully\n";
         return Command::SUCCESS;
     }
 }

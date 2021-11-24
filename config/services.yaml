@@ -32,9 +32,9 @@ services:
         tags:
             - {name: "console.command", command: "app:pull"}
 
-    App\Slot\Infrastructure\Command\:
-        resource: '../src/Slot/Infrastructure/Command/'
-        tags: [ 'command.service_arguments' ]
+#    App\Slot\Infrastructure\Command\:
+#        resource: '../src/Slot/Infrastructure/Command/'
+#        tags: [ 'command.service_arguments' ]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
