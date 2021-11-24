@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Exception\SlotsSorter;
+namespace App\Slot\Application\Exception\SlotsSorter;
 
-use App\Exception\DomainException;
+use App\Slot\Domain\Exception\DomainException;
 
 final class TooManySlotsException extends DomainException
 {
