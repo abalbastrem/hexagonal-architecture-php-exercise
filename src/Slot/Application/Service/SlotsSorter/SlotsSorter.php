@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Slot\Application\Service;
+namespace App\Slot\Application\Service\SlotsSorter;
 
 use App\Slot\Domain\Entity\SlotCollection;
 

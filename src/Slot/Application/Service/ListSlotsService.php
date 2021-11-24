@@ -5,6 +5,9 @@ namespace App\Slot\Application\Service;
 
 
 use App\Slot\Application\ListSlotsRequest;
+use App\Slot\Application\Service\SlotsSorter\SlotsSorterByDateTime;
+use App\Slot\Application\Service\SlotsSorter\SlotsSorterByDuration;
+use App\Slot\Application\Service\SlotsSorter\VeryLazySlotsSorter;
 use App\Slot\Domain\Entity\SlotCollection;
 use App\Slot\Domain\ISlotRepository;
 
@@ -17,21 +20,24 @@ class ListSlotsService
     }
 
     public function list(ListSlotsRequest $request): SlotCollection {
-        // TODO fix criteria
         $criteria = array(
-//            'dateFrom' => $request->getDateFrom(),
-//            'dateTo' => $request->getDateTo(),
-//            'doctorId' => $request->getDoctorId()
+            'dateFrom' => $request->getDateFrom(),
+            'dateTo' => $request->getDateTo()
         );
-        $slots = $this->slotRepository->findBy($criteria);
+        $slots = $this->slotRepository->findByCriteria($criteria);
+        if (empty($slots)) {
+            return new SlotCollection();
+        }
 
         $slotCollection = new SlotCollection();
-        $slotCollection->addSlotArray($slots);
+        foreach ($slots as $slot) {
+            $slotCollection->addSlot($slot);
+        }
 
         $slotsSorter = match ($request->getSortType()) {
             'duration' => new SlotsSorterByDuration(),
             'datetime' => new SlotsSorterByDateTime(),
-            default => new VeryLazySlotsSorter(10000),
+            default => new VeryLazySlotsSorter(3),
         };
 
         return $slotsSorter->sort($slotCollection);
