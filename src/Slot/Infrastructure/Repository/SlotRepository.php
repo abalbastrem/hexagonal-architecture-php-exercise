@@ -5,6 +5,8 @@ namespace App\Slot\Infrastructure\Repository;
 use App\Slot\Domain\Entity\Slot;
 use App\Slot\Domain\ISlotRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\LazyCriteriaCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,11 +27,30 @@ class SlotRepository extends ServiceEntityRepository implements ISlotRepository
      */
     public function saveAll(array $slots)
     {
-        // TODO: Implement saveAll() method.
         foreach ($slots as $slot) {
             $this->_em->persist($slot);
-//            $this->createQueryBuilder()->add();
         }
         $this->_em->flush();
+    }
+
+    public function findByCriteria(array $criteria): array
+    {
+        // TODO use Criteria
+//        $doctrineCriteria = new Criteria();
+//        $doctrineCriteria
+//            ->where(Criteria::expr()->eq('doctor_id', 0))
+//            ->where(Criteria::expr()->gt('date_from', $criteria['dateFrom']->format("Y-m-d H:i:s")))
+//            ->andWhere(Criteria::expr()->lt('date_to', $criteria['dateTo']->format("Y-m-d H:i:s")));
+//        $slots = $this->matching($doctrineCriteria);
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select("s")
+            ->from(Slot::class, "s")
+            ->where("s.dateFrom >= :dateFrom")
+            ->andWhere("s.dateTo <= :dateTo")
+            ->setParameter("dateFrom", $criteria['dateFrom']->format("Y-m-d H:i:s"))
+            ->setParameter("dateTo", $criteria['dateTo']->format("Y-m-d H:i:s"));
+
+        return $qb->getQuery()->getResult();
     }
 }

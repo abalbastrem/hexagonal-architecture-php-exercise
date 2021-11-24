@@ -30,7 +30,7 @@ services:
     app.slot.infrastructure.command.pull_slots_command:
         class: App\Slot\Infrastructure\Command\PullSlotsCommand
         tags:
-            - {name: "console.command", command: "app:pull"}
+            - {name: "console.command", command: "app:pull-slots"}
 
 #    App\Slot\Infrastructure\Command\:
 #        resource: '../src/Slot/Infrastructure/Command/'

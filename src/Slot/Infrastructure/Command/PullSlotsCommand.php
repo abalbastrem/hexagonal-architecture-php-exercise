@@ -10,6 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Command\Command;
 use App\Slot\Application\Service\PullSlotsService;
 
+/**
+ * Class PullSlotsCommand
+ * console name = app:pull-slots
+ * @package App\Slot\Infrastructure\Command
+ */
 final class PullSlotsCommand extends Command
 {
     private PullSlotsRequest $request;
